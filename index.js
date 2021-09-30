@@ -1,5 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
-const btnAddToDo = document.getElementById("add-todo");
+const btnAddToDo = window.document.getElementById("add-todo");
 btnAddToDo.addEventListener("click", handleClick);
 
 const input = document.getElementById("todo-note");
@@ -17,7 +17,7 @@ function handleKeyDown(event) {
 
 function addToDo() {
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLUListElement
-  const list = window.document.getElementById("todo-list");
+  const list = document.getElementById("todo-list");
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
   const input = document.getElementById("todo-note");
   const text = input.value;
@@ -25,8 +25,14 @@ function addToDo() {
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement
   const item = document.createElement("li");
   item.textContent = text;
+  item.addEventListener("click", removeToDo);
   input.value = "";
   input.focus();
 
   list.appendChild(item);
+}
+
+function removeToDo(event) {
+  const list = document.getElementById("todo-list");
+  list.removeChild(event.target);
 }
