@@ -7,16 +7,16 @@
     <title>ToDo Notes</title>
   </head>
   <body>
-    <form method="POST" action="/todo/add/">
-      <input type="text" name="todo" id="todo-note" />
-      <input type="submit" value="Add ToDo" />
-    </form>
-    <ul>
-      <li>ToDo 1</li>
-      <li>ToDo 2</li>
-      <li>ToDo 3</li>
-      <li>ToDo 4</li>
-      <li>ToDo 5</li>
-    </ul>
+    <!-- cf, https://www.w3schools.com/html/html5_semantic_elements.asp -->
+    <div id="app">
+      <main>
+        <div class="input">
+          <input type="text" name="todo" id="todo-note" />
+          <input type="submit" value="Add ToDo" />
+        </div>
+      </main>
+      <ul class="list"></ul>
+    </div>
+    <script src="index.js"></script>
   </body>
 </html>
