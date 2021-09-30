@@ -12,6 +12,8 @@ function handleClick(event) {
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement
   const item = document.createElement("li");
   item.textContent = text;
+  input.value = "";
+  input.focus();
 
   list.appendChild(item);
 }
