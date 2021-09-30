@@ -10,6 +10,7 @@ function handleClick(event) {
 }
 
 function handleKeyDown(event) {
+  // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
   if (event.key === "Enter") {
     addToDo();
   }
