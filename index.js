@@ -1,9 +1,14 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
-const btnAddToDo = window.document.getElementById("add-todo");
-btnAddToDo.addEventListener("click", handleClick);
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+// https://developer.mozilla.org/en-US/docs/Web/Events
+document.addEventListener("DOMContentLoaded", function () {
+  // https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
+  const btnAddToDo = window.document.getElementById("add-todo");
+  btnAddToDo.addEventListener("click", handleClick);
 
-const input = document.getElementById("todo-note");
-input.addEventListener("keydown", handleKeyDown);
+  const input = document.getElementById("todo-note");
+  input.addEventListener("keydown", handleKeyDown);
+});
 
 function handleClick(event) {
   addToDo();
