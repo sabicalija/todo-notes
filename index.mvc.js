@@ -40,6 +40,10 @@ function updateToDoList() {
 function buildListItem(todo) {
   const item = document.createElement("li");
   item.textContent = todo;
+  item.addEventListener("click", () => {
+    removeToDo(todo);
+    updateUI();
+  });
   return item;
 }
 
@@ -67,4 +71,11 @@ function handleKeyDown(event) {
 // Controller
 function addToDo(text) {
   todos.push(text);
+}
+
+function removeToDo(text) {
+  const index = todos.indexOf(text);
+  if (index !== -1) {
+    todos.splice(index, 1);
+  }
 }
