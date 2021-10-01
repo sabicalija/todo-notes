@@ -10,8 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Model
 const todos = [
-  // { id: 12345678, text: "ToDo 1" },
-  // { id: 54256198, text: "ToDo 2" },
+  // { id: "676c9ba771", text: "ToDo 1" },
+  // { id: "dc19d1538f", text: "ToDo 2" },
+  // { id: "fd8c75b4fb", text: "ToDo 2" },
 ];
 
 // View
@@ -39,9 +40,9 @@ function updateToDoList() {
 
 function buildListItem(todo) {
   const item = document.createElement("li");
-  item.textContent = todo;
+  item.textContent = todo.text;
   item.addEventListener("click", () => {
-    removeToDo(todo);
+    removeToDo(todo.id);
     updateUI();
   });
   return item;
@@ -70,11 +71,18 @@ function handleKeyDown(event) {
 
 // Controller
 function addToDo(text) {
-  todos.push(text);
+  const id = CryptoJS.SHA256(text + new Date())
+    .toString()
+    .substring(0, 10);
+  const todo = {
+    id: id,
+    text: text,
+  };
+  todos.push(todo);
 }
 
-function removeToDo(text) {
-  const index = todos.indexOf(text);
+function removeToDo(id) {
+  const index = todos.findIndex((element) => element.id === id);
   if (index !== -1) {
     todos.splice(index, 1);
   }
