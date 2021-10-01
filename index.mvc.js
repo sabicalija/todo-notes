@@ -40,11 +40,19 @@ function updateToDoList() {
 
 function buildListItem(todo) {
   const item = document.createElement("li");
-  item.textContent = todo.text;
-  item.addEventListener("click", () => {
+  item.classList.add("todo-item");
+
+  const btnDelete = document.createElement("button");
+  btnDelete.textContent = "x";
+  btnDelete.addEventListener("click", () => {
     removeToDo(todo.id);
     updateUI();
   });
+  const span = document.createElement("span");
+  span.textContent = todo.text;
+
+  item.appendChild(btnDelete);
+  item.appendChild(span);
   return item;
 }
 
