@@ -33,6 +33,7 @@ function updateToDoList() {
   }
 
   // Build list
+  // https://www.freecodecamp.org/news/functional-programming-in-javascript/
   todos.map((todo) => buildListItem(todo)).forEach((item) => list.appendChild(item));
 }
 
