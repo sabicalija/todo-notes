@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Model
 const todos = [
-  // "ToDo 1",
-  // "Todo 2"
+  // { id: 12345678, text: "ToDo 1" },
+  // { id: 54256198, text: "ToDo 2" },
 ];
 
 // View
