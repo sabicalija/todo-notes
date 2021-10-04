@@ -14,17 +14,28 @@
     <div id="app">
       <main>
         <div class="input">
-          <input autofocus id="todo-note" type="text" name="todo" />
-          <button id="add-todo">Add ToDo</button>
+          <input type="text" name="title" id="todo-note-title" placeholder="Title" />
+          <textarea autofocus id="todo-note" placeholder="Enter note ..."></textarea>
+          <button id="add-todo">+</button>
         </div>
         <ul id="todo-list" class="list">
           <li class="todo-item">
             <button>x</button>
-            <span>ToDo 1</span>
+            <div>
+              <span>Title 1</span>
+            </div>
+            <div>
+              <span>ToDo 1</span>
+            </div>
           </li>
           <li class="todo-item">
             <button>x</button>
-            <span>ToDo 2</span>
+            <div>
+              <span>Title 2</span>
+            </div>
+            <div>
+              <span>ToDo 2</span>
+            </div>
           </li>
         </ul>
       </main>

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const input = document.getElementById("todo-note");
   input.addEventListener("keydown", handleKeyDown);
 
-  updateUI();
+  // updateUI();
 });
 
 // Model

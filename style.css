@@ -1,24 +1,135 @@
-body,
-div#app,
-main {
-  background: red;
-  border: 1px black solid;
+html {
+  background: #fafad2;
 }
 
+html,
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  width: 100%;
-  height: 100%;
+  padding: 0;
 }
 
-div#app {
-  width: 100%;
-  height: 100%;
-  background-color: green;
+#app {
+  margin: 0 2rem;
 }
 
+#app,
 main {
-  width: 100%;
   height: 100%;
-  background-color: yellow;
+}
+
+main > div.input {
+  position: relative;
+}
+
+main > div.input,
+#todo-list > li {
+  margin: 10% 20%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+main > div.input,
+#todo-list > li {
+  box-shadow: 2px 2px 4px 1px #cac58f;
+}
+
+#todo-note-title,
+#todo-list > li > div:first-of-type {
+  margin-bottom: 0.5rem;
+}
+
+.input,
+#todo-note-title,
+#todo-note,
+.todo-item {
+  background: #fff740;
+}
+
+#todo-note-title {
+  display: none;
+}
+
+#todo-note-title,
+#todo-list > li > div:first-of-type {
+  font-weight: bold;
+}
+
+.input:focus-within #todo-note-title {
+  display: block;
+}
+
+#todo-note-title,
+#todo-note {
+  border: unset;
+  padding: 0;
+}
+
+#todo-note-title,
+#todo-note,
+#todo-list > li {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#todo-note-title:focus-visible,
+#todo-note:focus-visible {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+#todo-note {
+  height: 4rem;
+  resize: none;
+}
+
+#add-todo {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+
+  height: 2rem;
+  width: 2rem;
+  margin: 0;
+  padding: 0;
+
+  background: #bfb700;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px 1px #cac58f;
+}
+
+#todo-list {
+  list-style-type: none;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#todo-list > li {
+  flex: 0 1 25%;
+  margin: 1rem;
+  padding: 0.5rem;
+  position: relative;
+}
+
+#todo-list > li > button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media screen and (max-width: 760px) {
+  main > div.input {
+    margin: 0;
+  }
+
+  #todo-list {
+    flex-flow: column nowrap;
+    padding-inline-start: unset;
+  }
+
+  #todo-list > li {
+    flex: 1 1 100%;
+  }
 }
