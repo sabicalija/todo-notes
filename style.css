@@ -53,10 +53,23 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.todo__input__add {
+.todo__input__control {
   position: absolute;
-  right: 1rem;
-  bottom: 0.5rem;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  width: calc(100% - 3rem);
+  right: 0;
+  bottom: 0;
+  padding: 0 1.5rem 1rem 1.5rem;
+}
+
+.todo__input__control--save {
+  /* position: absolute; */
+  /* right: 1rem; */
+  /* bottom: 0.5rem; */
+}
+
+.todo__input__control--color {
 }
 
 .todo__list {
