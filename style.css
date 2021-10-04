@@ -1,28 +1,139 @@
-html {
-  background: #fafad2;
-}
-
-html,
-body {
+body,
+#app {
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
+  background: #fafad2;
+}
+
+body {
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 #app {
-  margin: 0 2rem;
+  width: calc(100% - 16rem);
+  margin: 0 8rem;
 }
 
-#app,
-main {
-  height: 100%;
-}
+.todo__input {
+  margin: 2rem auto 0;
+  max-width: 400px;
 
-main > div.input {
   position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+
+  background: #fff740;
+  border-radius: 0.5rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+.todo__input__title {
+  display: none !important;
+  overflow-wrap: break-word;
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.todo__input:focus-within > .todo__input__title {
+  display: block !important;
+}
+
+.todo__input__text {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.todo__input__add {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.5rem;
+}
+
+.todo__list {
+  padding-inline-start: unset;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 0.5rem; */
+  display: flex;
+  flex-flow: row wrap;
+  margin: 2rem auto 0;
+  justify-content: space-evenly;
+}
+
+.todo__list__item {
+  list-style-type: none;
+  position: relative;
+
+  flex: 0 1 calc(33% - 4rem);
+  height: fit-content;
+
+  background: #fff740;
+  border-radius: 0.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 1rem;
+}
+
+.todo__list__item__title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.todo__list__item__control {
+  position: absolute;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  width: calc(100% - 3rem);
+  right: 0;
+  bottom: 0;
+  padding: 0 1.5rem 1rem 1.5rem;
+}
+
+.material {
+  box-shadow: 1px 1px 4px 1px #bfb700;
+}
+
+.editable {
+  background: none;
+  border: none;
+}
+
+.editable:focus-visible {
+  outline: none;
+}
+
+.controlable {
+  padding: 1.5rem 1.5rem 3.5rem;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.btn > .fas {
+  color: #403d00;
+  text-shadow: #bfb700 1px 2px;
+}
+
+.btn-size-1 {
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.6rem;
+  padding: 0.2rem;
+}
+
+/* 
 main > div.input,
 #todo-list > li {
   margin: 10% 20%;
@@ -62,8 +173,16 @@ main > div.input,
 
 #todo-note-title,
 #todo-note {
+  width: 100%;
   border: unset;
   padding: 0;
+}
+
+#todo-note-title,
+#todo-note {
+  background: red;
+  display: inline-block;
+  word-wrap: break-word;
 }
 
 #todo-note-title,
@@ -76,7 +195,6 @@ main > div.input,
 #todo-note:focus-visible {
   border: none;
   outline: none;
-  width: 100%;
 }
 
 #todo-note {
@@ -132,4 +250,4 @@ main > div.input,
   #todo-list > li {
     flex: 1 1 100%;
   }
-}
+} */

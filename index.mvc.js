@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const btnAddToDo = document.getElementById("add-todo");
+  const btnAddToDo = document.getElementById("add");
   btnAddToDo.addEventListener("click", handleClick);
 
-  const input = document.getElementById("todo-note");
+  const input = document.getElementById("text");
   input.addEventListener("keydown", handleKeyDown);
 
   // updateUI();
@@ -15,12 +15,9 @@ const todos = [
   // { id: "fd8c75b4fb", text: "ToDo 2" },
 ];
 
-// View
-function clearInput() {
-  const input = document.getElementById("todo-note");
-  input.value = "";
-}
+const colors = ["#fff740", "#feff9c", "#7afcff", "#ff65a3", "#ff7eb9"];
 
+// View
 function updateUI() {
   updateToDoList();
 }
@@ -48,42 +45,63 @@ function buildListItem(todo) {
     removeToDo(todo.id);
     updateUI();
   });
-  const span = document.createElement("span");
-  span.textContent = todo.text;
+  const divTitle = document.createElement("div");
+  const spanTitle = document.createElement("span");
+  spanTitle.textContent = todo.title;
+  divTitle.appendChild(spanTitle);
+
+  const divText = document.createElement("div");
+  const spanText = document.createElement("span");
+  spanText.textContent = todo.text;
+  divText.appendChild(spanText);
 
   item.appendChild(btnDelete);
-  item.appendChild(span);
+  item.appendChild(divTitle);
+  item.appendChild(divText);
+
   return item;
 }
 
 function getInput() {
-  const input = document.getElementById("todo-note");
-  return input.value;
+  const inputTitle = document.getElementById("todo-note-title");
+  const inputText = document.getElementById("todo-note");
+  return [inputTitle.value, inputText.value];
+}
+
+function clearInput() {
+  const inputTitle = document.getElementById("todo-note-title");
+  const inputText = document.getElementById("todo-note");
+  inputTitle.value = inputText.value = "";
 }
 
 function handleClick(event) {
-  const text = getInput();
-  addToDo(text);
-  clearInput();
-  updateUI();
-}
-
-function handleKeyDown(event) {
-  if (event.key === "Enter") {
-    const text = getInput();
-    addToDo(text);
+  const [title, text] = getInput();
+  if (text !== "") {
+    addToDo(title, text);
     clearInput();
     updateUI();
   }
 }
 
+function handleKeyDown(event) {
+  if (event.key === "Enter") {
+    const [title, text] = getInput();
+    if (text !== "") {
+      addToDo(title, text);
+      clearInput();
+      updateUI();
+    }
+  }
+}
+
 // Controller
-function addToDo(text) {
-  const id = CryptoJS.SHA256(text + new Date())
+function addToDo(title, text) {
+  const id = CryptoJS.SHA256(title + text + new Date())
     .toString()
     .substring(0, 10);
   const todo = {
     id: id,
+    title: title,
     text: text,
   };
   todos.push(todo);
