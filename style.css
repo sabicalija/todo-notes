@@ -62,11 +62,13 @@ body {
   /* bottom: 0.5rem; */
 }
 
-.todo__input__control--color {
+.todo__input__control--color,
+.todo__list__item__control--color {
   position: relative;
 }
 
-.todo__input__control--color--select {
+.todo__input__control--color--select,
+.todo__list__item__control--color--select {
   display: flex;
   flex-flow: row-reverse nowrap;
 
@@ -78,7 +80,8 @@ body {
   border-radius: 0.5rem;
 }
 
-.todo__input__control--color--select--button {
+.todo__input__control--color--select--button,
+.todo__list__item__control--color--select--button {
   width: 1.6rem;
   height: 1.6rem;
   border: none;
@@ -86,11 +89,13 @@ body {
   border-left: 1px solid black;
 }
 
-.todo__input__control--color--select--button:first-child {
+.todo__input__control--color--select--button:first-child,
+.todo__list__item__control--color--select--button:first-child {
   border-radius: 0 0.5rem 0.5rem 0;
 }
 
-.todo__input__control--color--select--button:last-child {
+.todo__input__control--color--select--button:last-child,
+.todo__list__item__control--color--select--button:last-child {
   border-radius: 0.5rem 0 0 0.5rem;
   border-left: unset;
 }

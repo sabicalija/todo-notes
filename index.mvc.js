@@ -122,6 +122,7 @@ function buildListItem(todo) {
   const buttonColor = document.createElement("button");
   buttonColor.title = "Change color";
   buttonColor.classList.add("todo__list__item__control--color", "btn", "btn-size-1");
+  wrapButtonColorSelect(buttonColor, item, "todo__list__item__control--color--select");
 
   const buttonColorIcon = document.createElement("i");
   buttonColorIcon.classList.add("fas", "fa-palette");
