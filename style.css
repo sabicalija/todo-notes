@@ -30,16 +30,11 @@ body {
 }
 
 .todo__input__title {
-  display: none !important;
   overflow-wrap: break-word;
   display: block;
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-}
-
-.todo__input:focus-within > .todo__input__title {
-  display: block !important;
 }
 
 .todo__input__text {
@@ -165,5 +160,23 @@ body {
 
   .todo__list__item {
     flex: 0 1 calc(100% - 2rem);
+  }
+}
+
+.slide-in {
+  animation-name: slide;
+  animation-duration: 200ms;
+  animation-delay: 0;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+}
+
+@keyframes slide {
+  from {
+    transform: translateY(30em);
+  }
+  to {
+    transform: translateY(0);
   }
 }

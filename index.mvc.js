@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const save = document.getElementById("save");
-  save.addEventListener("click", handleClickSave);
-  updateUI();
+  save.addEventListener("click", handleClickInputSave);
+  initList();
 });
 
 // Model
@@ -14,11 +14,24 @@ const todos = [
 const colors = ["#fff740", "#feff9c", "#7afcff", "#ff65a3", "#ff7eb9"];
 
 // View
-function updateUI() {
-  updateToDoList();
+function initUI() {
+  initList();
 }
 
-function updateToDoList() {
+function addListItem(id, title, text, color) {
+  const todo = { id, title, text, color };
+  const list = document.getElementById("list");
+  const item = buildListItem(todo);
+  list.appendChild(item);
+}
+
+function removeListItem(id) {
+  const list = document.getElementById("list");
+  const item = document.getElementById(id);
+  list.removeChild(item);
+}
+
+function initList() {
   const list = document.getElementById("list");
 
   // Clear list
@@ -27,13 +40,13 @@ function updateToDoList() {
   }
 
   // Build list
-  // https://www.freecodecamp.org/news/functional-programming-in-javascript/
   todos.map((todo) => buildListItem(todo)).forEach((item) => list.appendChild(item));
 }
 
 function buildListItem(todo) {
   const item = document.createElement("li");
-  item.classList.add("todo__list__item", "controlable", "material");
+  item.classList.add("todo__list__item", "controlable", "material", "slide-in");
+  item.id = todo.id;
 
   const title = document.createElement("div");
   title.classList.add("todo__list__item__title");
@@ -53,10 +66,7 @@ function buildListItem(todo) {
   const buttonDeleteIcon = document.createElement("i");
   buttonDeleteIcon.classList.add("fas", "fa-trash");
   buttonDelete.appendChild(buttonDeleteIcon);
-  buttonDelete.addEventListener("click", () => {
-    removeToDo(todo.id);
-    updateUI();
-  });
+  buttonDelete.addEventListener("click", handleClickItemDelete(todo.id));
 
   const buttonEdit = document.createElement("button");
   buttonEdit.title = "Edit note";
@@ -98,20 +108,32 @@ function clearInput() {
   title.value = text.value = "";
 }
 
-function handleClickSave(event) {
+function handleClickInputSave(event) {
   const [title, text, color] = getInput();
+
   if (text !== "") {
-    addToDo(title, text, color);
+    const id = generateId();
+    addToDo(id, title, text, color);
+    addListItem(id, title, text, color);
     clearInput();
-    updateUI();
   }
 }
 
-// Controller
-function addToDo(title, text, color) {
-  const id = CryptoJS.SHA256(title + text + color + new Date())
+function handleClickItemDelete(id) {
+  return () => {
+    removeToDo(id);
+    removeListItem(id);
+  };
+}
+
+function generateId(title, text, color) {
+  return CryptoJS.SHA256(title + text + color + new Date())
     .toString()
     .substring(0, 10);
+}
+
+// Controller
+function addToDo(id, title, text, color) {
   const todo = {
     id: id,
     title: title,
