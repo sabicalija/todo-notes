@@ -30,8 +30,6 @@ body {
 }
 
 .todo__input__title {
-  overflow-wrap: break-word;
-  display: block;
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -92,6 +90,7 @@ body {
 }
 
 .todo__list__item__title {
+  font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
