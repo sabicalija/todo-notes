@@ -12,11 +12,11 @@ let notes = [
 ];
 
 let colors = [
-  { background: "#fff740", shadow: "1px 1px 4px 1px #bfb700" },
-  { background: "#feff9c", shadow: "1px 1px 4px 1px #a3a400" },
-  { background: "#7afcff", shadow: "1px 1px 4px 1px #009397" },
-  { background: "#ff65a3", shadow: "1px 1px 4px 1px #8e0039" },
-  { background: "#ff7eb9", shadow: "1px 1px 4px 1px #980046" },
+  // { background: "#fff740", shadow: "1px 1px 4px 1px #bfb700" },
+  // { background: "#feff9c", shadow: "1px 1px 4px 1px #a3a400" },
+  // { background: "#7afcff", shadow: "1px 1px 4px 1px #009397" },
+  // { background: "#ff65a3", shadow: "1px 1px 4px 1px #8e0039" },
+  // { background: "#ff7eb9", shadow: "1px 1px 4px 1px #980046" },
 ];
 
 // View
@@ -188,7 +188,13 @@ function init() {
 
 function load() {
   notes = JSON.parse(localStorage.getItem("notes")) || [];
-  colors = JSON.parse(localStorage.getItem("colors")) || [];
+  colors = JSON.parse(localStorage.getItem("colors")) || [
+    { background: "#fff740", shadow: "1px 1px 4px 1px #bfb700" },
+    { background: "#feff9c", shadow: "1px 1px 4px 1px #a3a400" },
+    { background: "#7afcff", shadow: "1px 1px 4px 1px #009397" },
+    { background: "#ff65a3", shadow: "1px 1px 4px 1px #8e0039" },
+    { background: "#ff7eb9", shadow: "1px 1px 4px 1px #980046" },
+  ];
 }
 
 function save() {
