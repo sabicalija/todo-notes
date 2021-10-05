@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   const save = document.getElementById("save");
   save.addEventListener("click", handleClickInputSave);
-  initUI();
+  init();
 });
 
 // Model
-const todos = [
+let notes = [
   // { id: "676c9ba771", title: "Title 1", text: "ToDo 1", color: "#fff740" },
   // { id: "dc19d1538f", title: "Title 2", text: "ToDo 2", color: "#fff740" },
   // { id: "fd8c75b4fb", title: "Title 2", text: "ToDo 2", color: "#fff740" },
 ];
 
-const colors = [
+let colors = [
   { background: "#fff740", shadow: "1px 1px 4px 1px #bfb700" },
   { background: "#feff9c", shadow: "1px 1px 4px 1px #a3a400" },
   { background: "#7afcff", shadow: "1px 1px 4px 1px #009397" },
@@ -81,7 +81,7 @@ function initList() {
   }
 
   // Build list
-  todos.map((todo) => buildListItem(todo)).forEach((item) => list.appendChild(item));
+  notes.map((todo) => buildListItem(todo)).forEach((item) => list.appendChild(item));
 }
 
 function buildListItem(todo) {
@@ -180,6 +180,21 @@ function generateId(title, text, color) {
 }
 
 // Controller
+function init() {
+  load();
+  initUI();
+}
+
+function load() {
+  notes = JSON.parse(localStorage.getItem("notes")) || [];
+  colors = JSON.parse(localStorage.getItem("colors")) || [];
+}
+
+function save() {
+  localStorage.setItem("notes", JSON.stringify(notes));
+  localStorage.setItem("colors", JSON.stringify(colors));
+}
+
 function addToDo(id, title, text, color) {
   const todo = {
     id: id,
@@ -187,12 +202,14 @@ function addToDo(id, title, text, color) {
     text: text,
     color: color,
   };
-  todos.push(todo);
+  notes.push(todo);
+  save();
 }
 
 function removeToDo(id) {
-  const index = todos.findIndex((element) => element.id === id);
+  const index = notes.findIndex((element) => element.id === id);
   if (index !== -1) {
-    todos.splice(index, 1);
+    notes.splice(index, 1);
   }
+  save();
 }
