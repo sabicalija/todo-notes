@@ -181,6 +181,7 @@ function generateId(title, text, color) {
 
 // Controller
 function init() {
+  registerServiceWorker();
   load();
   initUI();
 }
@@ -212,4 +213,14 @@ function removeToDo(id) {
     notes.splice(index, 1);
   }
   save();
+}
+
+// Extras
+function registerServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((reg) => console.log("Service Worker registered!", reg))
+      .catch((err) => console.log("Service Worker Registration failed!", err));
+  }
 }
