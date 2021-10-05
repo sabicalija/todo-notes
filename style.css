@@ -26,6 +26,7 @@ body {
   height: 100%;
   z-index: 99;
   margin: auto;
+  pointer-events: none;
 }
 
 .todo__global-ui__service-worker {
