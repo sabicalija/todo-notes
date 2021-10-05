@@ -181,7 +181,7 @@ function generateId(title, text, color) {
 
 // Controller
 function init() {
-  registerServiceWorker();
+  registerServiceWorker("/todo-notes");
   load();
   initUI();
 }
@@ -216,11 +216,44 @@ function removeToDo(id) {
 }
 
 // Extras
-function registerServiceWorker() {
+function registerServiceWorker(base) {
   if ("serviceWorker" in navigator) {
+    let refreshing;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshing) return;
+      window.location.reload();
+      refreshing = true;
+    });
     navigator.serviceWorker
-      .register("/sw.js")
-      .then((reg) => console.log("Service Worker registered!", reg))
+      .register(base + "/sw.js", { scope: base + "/" })
+      .then((reg) => handleRegistration(reg))
       .catch((err) => console.log("Service Worker Registration failed!", err));
   }
+}
+
+function handleRegistration(reg) {
+  reg.addEventListener("updatefound", () => {
+    // const worker = reg.installing;
+    const worker = reg.waiting;
+    if (!worker) return;
+    worker.addEventListener("statechange", () => {
+      switch (worker.state) {
+        case "installed":
+          const serviceWorkerUpdateModal = document.getElementById("service-worker-modal");
+          const serviceWorkerUpdateControl = document.getElementById("service-worker");
+          if (navigator.serviceWorker.controller) {
+            serviceWorkerUpdateControl.addEventListener("click", () => {
+              worker.postMessage({ action: "skipWaiting" });
+            });
+            serviceWorkerUpdateModal.classList.toggle("hidden");
+            break;
+          }
+      }
+    });
+  });
+  console.log("Service Worker registered!", reg);
+
+  // navigator.serviceWorker.addEventListener("message", (event) => {
+  //   console.log(event.data.msg, event.data.url);
+  // });
 }

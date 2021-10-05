@@ -1,5 +1,27 @@
-const version = "v1.0.0-beta.0";
-const urls = ["/", "/style.css", "/index.mvc.js", "/favicon.svg", "/favicon.ico"];
+const version = "v1.0.0-beta.14";
+const base = "/todo-notes";
+const assetUrls = [
+  "/android-chrome-192x192.png",
+  "/android-chrome-512x512.png",
+  "/apple-touch-icon.png",
+  "/browserconfig.xml",
+  "/favicon-16x16.png",
+  "/favicon-32x32.png",
+  "/favicon.ico",
+  "/manifest.json",
+  "/mstile-70x70.png",
+  "/mstile-144x144.png",
+  "/mstile-150x150.png",
+  "/mstile-310x150.png",
+  "/safari-pinned-tab.svg",
+].map((entry) => "/assets/favicon" + entry);
+const urls = ["/", "/style.css", "/index.mvc.js", ...assetUrls].map((entry) => base + entry);
+
+self.addEventListener("message", (event) => {
+  if (event.data.action === "skipWaiting") {
+    self.skipWaiting();
+  }
+});
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

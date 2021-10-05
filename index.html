@@ -21,6 +21,14 @@
   </head>
   <body>
     <div id="app" class="todo">
+      <div class="todo__global-ui">
+        <div id="service-worker-modal" class="todo__global-ui__service-worker slide-in hidden">
+          <div class="todo__global-ui__service-worker--description">
+            Update available!
+          </div>
+          <button id="service-worker" class="todo__global-ui__service-worker--control-update">Update</button>
+        </div>
+      </div>
       <div class="todo__input controlable material">
         <input id="title" class="todo__input__title editable" type="text" name="title" spellcheck="false" placeholder="Title" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." />
         <textarea id="text" class="todo__input__text editable" placeholder="Enter note ..." rows="6" spellcheck="false">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</textarea>
