@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const save = document.getElementById("save");
   save.addEventListener("click", handleClickInputSave);
-  initList();
+  initUI();
 });
 
 // Model
@@ -11,10 +11,17 @@ const todos = [
   // { id: "fd8c75b4fb", title: "Title 2", text: "ToDo 2", color: "#fff740" },
 ];
 
-const colors = ["#fff740", "#feff9c", "#7afcff", "#ff65a3", "#ff7eb9"];
+const colors = [
+  { background: "#fff740", shadow: "1px 1px 4px 1px #bfb700" },
+  { background: "#feff9c", shadow: "1px 1px 4px 1px #a3a400" },
+  { background: "#7afcff", shadow: "1px 1px 4px 1px #009397" },
+  { background: "#ff65a3", shadow: "1px 1px 4px 1px #8e0039" },
+  { background: "#ff7eb9", shadow: "1px 1px 4px 1px #980046" },
+];
 
 // View
 function initUI() {
+  initInput();
   initList();
 }
 
@@ -29,6 +36,40 @@ function removeListItem(id) {
   const list = document.getElementById("list");
   const item = document.getElementById(id);
   list.removeChild(item);
+}
+
+function initInput() {
+  const button = document.getElementById("color");
+  const note = document.getElementById("title").parentNode;
+  wrapButtonColorSelect(button, note, "todo__input__control--color--select");
+}
+
+function wrapButtonColorSelect(listener, target, className) {
+  const div = document.createElement("div");
+  div.classList.add(className, "hidden");
+
+  for (const color of colors) {
+    const button = document.createElement("button");
+    button.classList.add(className + "--button");
+    button.style.background = color.background;
+    button.addEventListener("click", (event) => {
+      target.style.background = color.background;
+      target.style.boxShadow = color.shadow;
+    });
+    div.appendChild(button);
+  }
+
+  listener.appendChild(div);
+  listener.addEventListener("click", (event) => {
+    div.classList.toggle("hidden");
+  });
+
+  window.addEventListener("click", (event) => {
+    if (listener.contains(event.target) || listener === event.target) return;
+    if (!div.classList.contains("hidden")) {
+      div.classList.add("hidden");
+    }
+  });
 }
 
 function initList() {
@@ -47,6 +88,8 @@ function buildListItem(todo) {
   const item = document.createElement("li");
   item.classList.add("todo__list__item", "controlable", "material", "slide-in");
   item.id = todo.id;
+  item.style.background = todo.color.background;
+  item.style.boxShadow = todo.color.shadow;
 
   const title = document.createElement("div");
   title.classList.add("todo__list__item__title");
@@ -98,8 +141,11 @@ function buildListItem(todo) {
 function getInput() {
   const title = document.getElementById("title");
   const text = document.getElementById("text");
-  const color = { value: "#fff740" }; // document.getElementById("color");
-  return [title.value, text.value, color.value];
+  const color = {
+    background: title.parentNode.style.background,
+    shadow: title.parentNode.style.boxShadow,
+  };
+  return [title.value, text.value, color];
 }
 
 function clearInput() {
@@ -111,7 +157,7 @@ function clearInput() {
 function handleClickInputSave(event) {
   const [title, text, color] = getInput();
 
-  if (text !== "") {
+  if (title !== "" && text !== "") {
     const id = generateId();
     addToDo(id, title, text, color);
     addListItem(id, title, text, color);

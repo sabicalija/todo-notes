@@ -63,6 +63,36 @@ body {
 }
 
 .todo__input__control--color {
+  position: relative;
+}
+
+.todo__input__control--color--select {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+
+  position: absolute;
+  right: 2rem;
+  bottom: 0;
+
+  border: 2px solid black;
+  border-radius: 0.5rem;
+}
+
+.todo__input__control--color--select--button {
+  width: 1.6rem;
+  height: 1.6rem;
+  border: none;
+  cursor: pointer;
+  border-left: 1px solid black;
+}
+
+.todo__input__control--color--select--button:first-child {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.todo__input__control--color--select--button:last-child {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-left: unset;
 }
 
 .todo__list {
@@ -122,6 +152,10 @@ body {
   padding: 1.5rem 1.5rem 3.5rem;
 }
 
+.hidden {
+  display: none;
+}
+
 .btn {
   border: none;
   cursor: pointer;
@@ -130,7 +164,8 @@ body {
 
 .btn > .fas {
   color: #403d00;
-  text-shadow: #bfb700 1px 2px;
+  /* text-shadow: #bfb700 1px 2px; */
+  /* text-shadow: gray 1px 2px; */
 }
 
 .btn-size-1 {
