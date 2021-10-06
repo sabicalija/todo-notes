@@ -1,4 +1,4 @@
-const version = "v1.0.0-beta.0";
+const version = "v1.0.0-beta.1";
 const base = "/todo-notes";
 const assetUrls = [
   "/android-chrome-192x192.png",
