@@ -1,4 +1,4 @@
-const version = "v1.0.0-beta.4";
+const version = "v1.0.0-beta.5";
 const base = "/todo-notes";
 const assetUrls = [
   "/android-chrome-192x192.png",
@@ -15,7 +15,7 @@ const assetUrls = [
   "/mstile-310x150.png",
   "/safari-pinned-tab.svg",
 ].map((entry) => "/assets/favicon" + entry);
-const urls = ["/", "/style.css", "/index.mvc.js", ...assetUrls].map((entry) => base + entry);
+const urls = ["/", "/style.css", "/index.mvc.js", "/favicon.svg", ...assetUrls].map((entry) => base + entry);
 
 self.addEventListener("message", (event) => {
   if (event.data.action === "skipWaiting") {
