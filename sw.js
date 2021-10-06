@@ -1,4 +1,4 @@
-const version = "v1.0.0-beta.3";
+const version = "v1.0.0-beta.0";
 const base = "/todo-notes";
 const assetUrls = [
   "/android-chrome-192x192.png",
@@ -26,7 +26,6 @@ self.addEventListener("message", (event) => {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(version).then((cache) => {
-      console.log("Cache opened");
       return cache.addAll(urls);
     })
   );
