@@ -28,7 +28,7 @@ function initUI() {
 function addListItem(id, title, text, color) {
   const todo = { id, title, text, color };
   const list = document.getElementById("list");
-  const item = buildListItem(todo);
+  const item = buildListItem(todo, ["slide-in"]);
   list.appendChild(item);
 }
 
@@ -84,9 +84,9 @@ function initList() {
   notes.map((todo) => buildListItem(todo)).forEach((item) => list.appendChild(item));
 }
 
-function buildListItem(todo) {
+function buildListItem(todo, classNames = []) {
   const item = document.createElement("li");
-  item.classList.add("todo__list__item", "controlable", "material", "slide-in");
+  item.classList.add("todo__list__item", "controlable", "material", ...classNames);
   item.id = todo.id;
   item.style.background = todo.color.background;
   item.style.boxShadow = todo.color.shadow;
@@ -223,43 +223,50 @@ function removeToDo(id) {
 
 // Extras
 function registerServiceWorker(base) {
-  if ("serviceWorker" in navigator) {
-    let refreshing;
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (refreshing) return;
-      window.location.reload();
-      refreshing = true;
-    });
-    navigator.serviceWorker
-      .register(base + "/sw.js", { scope: base + "/" })
-      .then((reg) => handleRegistration(reg))
-      .catch((err) => console.log("Service Worker Registration failed!", err));
-  }
+  window.addEventListener("load", () => {
+    if ("serviceWorker" in navigator) {
+      let refreshing;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (refreshing) return;
+        window.location.reload();
+        refreshing = true;
+      });
+      navigator.serviceWorker
+        .register(base + "/sw.js", { scope: base + "/" })
+        .then((reg) => handleRegistration(reg))
+        .catch((err) => console.log("Service Worker Registration failed!", err));
+    }
+  });
 }
 
 function handleRegistration(reg) {
   reg.addEventListener("updatefound", () => {
-    // const worker = reg.installing;
-    const worker = reg.waiting;
-    if (!worker) return;
-    worker.addEventListener("statechange", () => {
-      switch (worker.state) {
-        case "installed":
-          const serviceWorkerUpdateModal = document.getElementById("service-worker-modal");
-          const serviceWorkerUpdateControl = document.getElementById("service-worker");
-          if (navigator.serviceWorker.controller) {
-            serviceWorkerUpdateControl.addEventListener("click", () => {
-              worker.postMessage({ action: "skipWaiting" });
-            });
-            serviceWorkerUpdateModal.classList.toggle("hidden");
+    if (reg.installing) {
+      const worker = reg.installing;
+      worker.addEventListener("statechange", () => {
+        switch (worker.state) {
+          case "installed":
+            handleUpdate(worker);
             break;
-          }
+        }
+      });
+    } else if (reg.waiting) {
+      const worker = reg.waiting;
+      if (worker.state === "installed") {
+        handleUpdate(worker);
       }
-    });
+    }
   });
-  console.log("Service Worker registered!", reg);
+}
 
-  // navigator.serviceWorker.addEventListener("message", (event) => {
-  //   console.log(event.data.msg, event.data.url);
-  // });
+function handleUpdate(worker) {
+  const serviceWorkerUpdateModal = document.getElementById("service-worker-modal");
+  const serviceWorkerUpdateControl = document.getElementById("service-worker");
+  if (navigator.serviceWorker.controller) {
+    serviceWorkerUpdateControl.addEventListener("click", () => {
+      worker.postMessage({ action: "skipWaiting" });
+      serviceWorkerUpdateModal.classList.toggle("hidden");
+    });
+    serviceWorkerUpdateModal.classList.toggle("hidden");
+  }
 }
